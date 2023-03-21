@@ -1,0 +1,13 @@
+{
+    "name": "lidem/tp-php-objet",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "LidemFramework\\": "LidemFramework/"
+        }
+    },
+    "require": {
+        "miladrahimi/phprouter": "5.*",
+        "ext-pdo": "*"
+    }
+}

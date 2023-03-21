@@ -1,0 +1,15 @@
+<h1><?php echo $logement->titre ?></h1>
+
+
+
+    <div class="card mb-3 card-detail">
+        <img src="/<?php echo $logement->photo ?>" class="card-img-top img-card-detail">
+        <div class="card-body">
+            <h5 class="card-title">Localisation : <?php echo $logement->ville. ', ' .$logement->pays ?></h5>
+            <p class="card-text">Description : <?php echo $logement->description ?></p>
+            <p class="card-text">Description : <?php echo $logement->surface ?>m&sup2;</p>
+            <p class="card-text"><small class="text-muted"><?php echo $logement->prix ?> € /nuit</small></p>
+            <a href="/logement/<?php echo $logement->id ?>" class="btn btn-primary bouton-voirplus">Réserver</a>
+        </div>
+    </div>
+

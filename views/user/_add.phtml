@@ -1,0 +1,43 @@
+<h1>Nouvel utilisateur</h1>
+
+<form action="" method="post" novalidate>
+    <div class="mb-3">
+        <label for="nom" class="form-label">Nom</label>
+        <input type="text" class="form-control" name="nom">
+
+    </div>
+    <div class="mb-3">
+        <label for="prenom" class="form-label">Prénom</label>
+        <input type="text" class="form-control" name="prenom">
+    </div>
+
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" name="email">
+    </div>
+
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password">
+    </div>
+
+
+
+    <div class="mb-3">
+        <label for="password-repeat" class="form-label">Retaper le password</label>
+        <input type="password" class="form-control" name="password-repeat">
+    </div>
+
+    <div>
+        <select name="role_id" class="form-select select-add-user">
+            <option selected>Choisir un role</option>
+            <option value="1">Annonceur</option>
+            <option value="2">Locataire</option>
+        </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary bouton-voirplus">S'inscrire</button>
+</form>
