@@ -3,20 +3,20 @@
 namespace App\Controller;
 
 use App\Model\Repository\RepositoryManager;
-use App\Model\Logement;
+use App\Model\Reservation;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Diactoros\ServerRequest;
 use LidemFramework\View;
 use Psr\Http\Message\ResponseInterface;
 
-class LogementController
+class ReservationController
 {
 	public function index(): ResponseInterface
 	{
         $view_data = [
-            'html_title' => 'Tous les logements - AirBnB',
-            'logements' => RepositoryManager::getRm()->logementRepository->findAll()
+            'html_title' => 'Toutes les réservations - AirBnB',
+            'reservations' => RepositoryManager::getRm()->reservationRepository->findAll()
         ];
 
         $view = new View( 'logement/index' );
@@ -25,15 +25,14 @@ class LogementController
 	}
 
 
-    public function getAnnoncesById(): ResponseInterface
+    public function reservation(): ResponseInterface
     {
-        // TODO
         $view_data = [
-            'html_title' => 'Tous les logements - AirBnB',
-            'logements' => RepositoryManager::getRm()->logementRepository->findAll()
+            'html_title' => 'Réservation - AirBnB',
+            'reservations' => RepositoryManager::getRm()->logementRepository->findAll()
         ];
 
-        $view = new View( 'page/mesannonces' );
+        $view = new View( 'page/reserver' );
 
         return new HtmlResponse( $view->render( $view_data ) );
     }

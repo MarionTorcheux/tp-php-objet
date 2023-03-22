@@ -5,13 +5,20 @@ namespace App\Controller;
 use App\App;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
+use LidemFramework\View;
 use Psr\Http\Message\ResponseInterface;
 
 class AuthController
 {
 	public function login(): ResponseInterface
 	{
-		return new HtmlResponse( __METHOD__ );
+        $view_data = [
+            'html_title' => 'Connexion - AirBnB'
+        ];
+
+        $view = new View( 'user/login' );
+
+        return new HtmlResponse( $view->render( $view_data ) );
 	}
 
 	public function auth(): RedirectResponse

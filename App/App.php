@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Controller\AuthController;
 use App\Controller\LogementController;
+use App\Controller\ReservationController;
 use App\Controller\UserController;
 use App\Model\Logement;
 use Exception;
@@ -78,6 +80,8 @@ class App
         $this->router->group( [ Attributes::PREFIX => '/utilisateur' ], function( Router $router ){
             $router->get( '/ajout', [ UserController::class, 'add' ] );
             $router->post( '/ajout', [ UserController::class, 'create' ] );
+            $router->get( '/login', [ AuthController::class, 'login' ] );
+            $router->get( '/reserver', [ ReservationController::class, 'reservation' ] );
         });
 
 
@@ -85,6 +89,7 @@ class App
 		$this->router->group( [ Attributes::PREFIX => '/annonceur' ], function( Router $router ){
             $router->get( '/ajout', [ LogementController::class, 'add' ] );
             $router->post( '/ajout', [ LogementController::class, 'create' ] );
+            $router->get( '/mesannonces', [ LogementController::class, 'getAnnoncesById' ] );
 		});
 
 	}

@@ -13,7 +13,8 @@ class Logement extends Model
         public int $couchage;
         public string $photo;
         public string $titre;
-        public int $annonceur_id;
-        public int $type_logement_id;
+
+        public array $type_logement;
+
 
 }

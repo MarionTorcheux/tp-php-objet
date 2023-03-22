@@ -1,4 +1,4 @@
-<h1>Tous les logements</h1>
+<h1>Mes annonces</h1>
 
 <?php if( count( $logements ) <= 0 ): ?>
     <div>Nous n'avons aucun logement</div>
@@ -8,7 +8,7 @@
         <?php foreach( $logements as $logement ): ?>
 
             <div class="card " style="width: 18rem;">
-                <img src="<?php echo $logement->photo ?>" class="card-img-top img-car-findall">
+                <img src="/<?php echo $logement->photo ?>" class="card-img-top img-car-findall">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $logement->titre ?></h5>
                     <p class="card-text"> <?php echo $logement->description ?></p>
