@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\App;
 use App\Session;
+use App\Model\User;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Diactoros\ServerRequest;
@@ -40,10 +41,10 @@ class AuthController
         // sinon on compare les valeurs en BDD
         else{
             $email = $post_data['email'];
-            $password = self::hash($post_data['password']);
+            $password = self::hashPassword($post_data['password']);
 
             //Appel au repository
-            $user = AppRepoManager::getRm()->getUserRepo()->checkAuth($email, $password);
+            $user = AuthController::hashPassword( $password);
             //Si on a un retour négatif, on ajoute l'erreur
             if(is_null($user)){
                 $form_result->addError(new FormError('Email et/ou mot de passe invalide'));
@@ -52,7 +53,8 @@ class AuthController
         // si il y a des erreurs on renvoie vers la page de connexion
         if($form_result->hasError()){
             Session::set(Session::FORM_RESULT, $form_result );
-            self::redirect('/connexion');
+            new RedirectResponse( '/connexion' );
+
         }
 
         //Si tout est OK on enregistre la session
@@ -60,7 +62,7 @@ class AuthController
         Session::set(Session::USER, $user);
 
         //enfin, on redirige sur l'accueil
-        self::redirect('/');
+        new RedirectResponse( '/' );
 
     }
 

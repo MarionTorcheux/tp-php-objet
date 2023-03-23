@@ -22,8 +22,6 @@ use LidemFramework\Database\DbConfig;
 use LidemFramework\Exception\SingletonUnserializationException;
 use LidemFramework\View;
 
-use App\Controller\PageController;
-
 class App
 {
 	#region Propriétés du Singleton
@@ -109,7 +107,6 @@ class App
 		}
 		// Les autres cas d'erreur
 		catch (Throwable $e) {
-			var_dump( $e );
 			$this->router->getPublisher()->publish( View::ErrorResponse( 500 ) );
 		}
 	}
