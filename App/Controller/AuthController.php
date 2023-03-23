@@ -3,23 +3,71 @@
 namespace App\Controller;
 
 use App\App;
+use App\Session;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Laminas\Diactoros\ServerRequest;
 use LidemFramework\View;
 use Psr\Http\Message\ResponseInterface;
+use LidemFramework\Form\FormError;
+use LidemFramework\Form\FormResult;
+
 
 class AuthController
 {
-	public function login(): ResponseInterface
+	public function index(): ResponseInterface
 	{
         $view_data = [
-            'html_title' => 'Connexion - AirBnB'
+            'html_title' => 'Connexion - AirBnB',
+            'form_result' => Session::get(Session::FORM_RESULT)
         ];
 
         $view = new View( 'user/login' );
 
         return new HtmlResponse( $view->render( $view_data ) );
 	}
+
+    public function login(ServerRequest $request):void
+    {
+        $post_data = $request->getParsedBody();
+        $form_result = new FormResult();
+        $user = new User();
+
+        //si un des champs n'est pas rempli on ajoute l'erreur
+        if(empty($post_data['email']) || empty($post_data['password'])){
+            $form_result->addError(new FormError('Veuillez remplir tous les champs'));
+        }
+        // sinon on compare les valeurs en BDD
+        else{
+            $email = $post_data['email'];
+            $password = self::hash($post_data['password']);
+
+            //Appel au repository
+            $user = AppRepoManager::getRm()->getUserRepo()->checkAuth($email, $password);
+            //Si on a un retour négatif, on ajoute l'erreur
+            if(is_null($user)){
+                $form_result->addError(new FormError('Email et/ou mot de passe invalide'));
+            }
+        }
+        // si il y a des erreurs on renvoie vers la page de connexion
+        if($form_result->hasError()){
+            Session::set(Session::FORM_RESULT, $form_result );
+            self::redirect('/connexion');
+        }
+
+        //Si tout est OK on enregistre la session
+        $user->password = '';
+        Session::set(Session::USER, $user);
+
+        //enfin, on redirige sur l'accueil
+        self::redirect('/');
+
+    }
+
+
+
+
+
 
 	public function auth(): RedirectResponse
 	{

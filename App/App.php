@@ -10,6 +10,7 @@ use App\Model\Logement;
 use Exception;
 use Throwable;
 
+
 use Laminas\Diactoros\Response\HtmlResponse;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Diactoros\ServerRequest;
@@ -80,15 +81,18 @@ class App
         $this->router->group( [ Attributes::PREFIX => '/utilisateur' ], function( Router $router ){
             $router->get( '/ajout', [ UserController::class, 'add' ] );
             $router->post( '/ajout', [ UserController::class, 'create' ] );
-            $router->get( '/login', [ AuthController::class, 'login' ] );
+            $router->get( '/connexion', [ AuthController::class, 'index' ] );
             $router->get( '/reserver', [ ReservationController::class, 'reservation' ] );
+
         });
+
+
 
 
 		// Partie Annonceur
 		$this->router->group( [ Attributes::PREFIX => '/annonceur' ], function( Router $router ){
             $router->get( '/ajout', [ LogementController::class, 'add' ] );
-            $router->post( '/ajout', [ LogementController::class, 'create' ] );
+            $router->post( '/ajout', [ LogementController::class, 'createLogement' ] );
             $router->get( '/mesannonces', [ LogementController::class, 'getAnnoncesById' ] );
 		});
 

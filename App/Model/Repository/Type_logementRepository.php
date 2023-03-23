@@ -18,7 +18,7 @@ class Type_logementRepository extends Repository
 		return Type_logement::class;
 	}
 
-    public function getTypeByID(): Type_logement
+    public function getTypeAll(): Type_logement
     {
         $q = 'SELECT * FROM '. $this->getTable();
 

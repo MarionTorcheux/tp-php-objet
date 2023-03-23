@@ -68,15 +68,18 @@ class LogementController
 	public function add(): ResponseInterface
 	{
 		$view_data = [
-			'html_title' => 'Ajouter un logement - AirBnB'
+			'html_title' => 'Ajouter un logement - AirBnB',
+            'type_logements' => RepositoryManager::getRm()->type_logementRepository->findAll()
 		];
 
 		$view = new View( 'logement/add' );
 
 		return new HtmlResponse( $view->render( $view_data ) );
+
+
 	}
 
-	public function create( ServerRequest $request ): RedirectResponse
+	public function createLogement( ServerRequest $request ): RedirectResponse
 	{
 		$form_data = $request->getParsedBody();
 
@@ -84,13 +87,13 @@ class LogementController
 			'pays' => $form_data[ 'pays' ],
 			'adresse' => $form_data[ 'adresse' ],
             'ville' => $form_data[ 'ville' ],
-            'prix' => [ 'prix' ],
+            'prix' => intval($form_data[ 'prix' ]),
             'surface' => $form_data[ 'surface' ],
             'description' => $form_data[ 'description' ],
             'couchage' => $form_data[ 'couchage' ],
             'photo' => $form_data[ 'photo' ],
-            'annonceur_id' => $form_data[ 'annonceur_id' ],
-            'type_logement_id' => $form_data[ 'type_logement_id' ],
+            'annonceur_id' => intval($form_data[ 'annonceur_id' ]),
+            'type_logement_id' => intval($form_data[ 'type_logement_id' ]),
             'titre'=>$form_data['titre']
 
 		];

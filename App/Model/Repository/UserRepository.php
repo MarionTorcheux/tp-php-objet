@@ -18,6 +18,27 @@ class UserRepository extends Repository
 		return User::class;
 	}
 
+
+    public function checkAuth(string $email, string $password): ?User
+    {
+        $q = sprintf(
+            'SELECT * FROM `%s` WHERE `email`=:email AND `password`=:password',
+            $this->getTable()
+        );
+
+
+        $stmt = $this->pdo->prepare($q);
+        if (!$stmt) return null;
+
+        $stmt->execute(['email' => $email, 'password' => $password]);
+
+        $user_data = $stmt->fetch();
+
+        return empty($user_data) ? null : new User($user_data);
+    }
+
+
+
 	public function create( User $new_user ): void
 	{
 		$q = 'INSERT INTO '. $this->getTable() .' (nom, prenom, email, password, role_id) ';

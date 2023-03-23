@@ -1,5 +1,7 @@
 <h1>Nouveau logement</h1>
 
+
+
 <form action="" method="post" novalidate>
     <div class="mb-3">
         <label for="pays" class="form-label">Pays</label>
@@ -20,8 +22,9 @@
 
     <div class="mb-3">
         <label for="prix" class="form-label">Prix</label>
-        <input type="number" class="form-control" name="prix">
+        <input type="text" class="form-control" name="prix">
     </div>
+
 
 
 
@@ -56,10 +59,21 @@
         <input type="text" class="form-control" name="annonceur_id">
     </div>
 
-    <div class="mb-3">
-        <label for="type_logement" class="form-label">Type_logement</label>
-        <input type="text" class="form-control" name="type_logement_id">
+
+
+    <div>
+        <select name="type_logement_id" class="form-select select-add-user">
+            <option selected>Choisir un type de logement</option>
+            <?php foreach ($type_logements as $type_logement):
+                {
+                    ?> <option value=" <?php echo $type_logement->id ?>"> <?php echo $type_logement->libelle?></option>
+
+                <?php }
+            endforeach;?>
+
+        </select>
     </div>
+
 
 
     <button type="submit" class="btn btn-primary bouton-voirplus">Ajouter un logement</button>
