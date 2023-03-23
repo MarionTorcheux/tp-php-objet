@@ -1,0 +1,23 @@
+<h1>Mes réservations : annonceur</h1>
+
+<?php if( count( $logements ) <= 0 ): ?>
+    <div>Nous n'avons aucun logement</div>
+<?php else: ?>
+
+    <div class="d-flex flex-row container-card-findall">
+        <?php foreach( $logements as $logement ): ?>
+
+            <div class="card " style="width: 18rem;">
+                <img src="/<?php echo $logement->photo ?>" class="card-img-top img-car-findall">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $logement->titre ?></h5>
+                    <p class="card-text"> <?php echo $logement->description ?></p>
+                    <a href="/logement/<?php echo $logement->id ?>" class="btn btn-primary bouton-voirplus">Voir plus</a>
+                </div>
+            </div>
+
+
+        <?php endforeach ?>
+    </div>
+
+<?php endif ?>
