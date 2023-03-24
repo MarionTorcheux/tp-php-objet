@@ -42,4 +42,25 @@ class LogementRepository extends Repository
 
 
     }
+
+
+
+    public function findByIdWithInfos($id)
+    {
+        $q = 'SELECT  logements.*, users.nom, users.prenom, types_logement.libelle FROM logements 
+                    INNER JOIN users on users.id = logements.annonceur_id
+                    INNER JOIN types_logement on logements.type_logement_id = types_logement.id
+                    WHERE logements.id = :id;';
+
+        $stmt = $this->pdo->prepare( $q );
+
+        $stmt->execute([
+            'id' => $id
+        ]);
+
+        $model = call_user_func( [ $this, 'getModel' ] );
+        $data = $stmt->fetch();
+
+        return $data ? new $model( $data ) : null;
+    }
 }

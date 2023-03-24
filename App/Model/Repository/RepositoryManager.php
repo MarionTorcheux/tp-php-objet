@@ -53,6 +53,10 @@ class RepositoryManager
 		return $pdo;
 	}
 
+
+
+
+
 	#region Méthodes Singleton
 	public static function getRm(): self
 	{

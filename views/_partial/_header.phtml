@@ -28,9 +28,16 @@
                     <button type="button" class="btn btn-dark bouton-voirplus"><a href="/utilisateur/connexion">Se connecter</a></button>
                 <?php  } ?>
 
+                <?php if ($view_data['isAnnonceur']){ ?>
                 <button type="button" class="btn btn-dark bouton-voirplus"><a href="/annonceur/ajout">Ajouter un logement</a></button>
-                <button type="button" class="btn btn-dark bouton-voirplus"><a href="/annonceur/ajout">Voir mes réservations</a></button>
                 <button type="button" class="btn btn-dark bouton-voirplus"><a href="/annonceur/mesannonces">Mes locations</a></button>
+                <?php  } ?>
+
+                <?php if ($view_data['isAuth']){ ?>
+                <button type="button" class="btn btn-dark bouton-voirplus"><a href="/annonceur/ajout">Voir mes réservations</a></button>
+                <button type="button" class="btn btn-dark bouton-voirplus"><a href="/deconnexion">Deconnexion</a></button>
+                    <p class="welcome"> Bienvenue <?php echo $view_data['user']->prenom ?> <i class="bi bi-flower1"></i></p>
+                <?php  } ?>
             </nav>
         </div>
     </header>

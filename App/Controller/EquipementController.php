@@ -10,7 +10,7 @@ use Laminas\Diactoros\ServerRequest;
 use LidemFramework\View;
 use Psr\Http\Message\ResponseInterface;
 
-class EquipementController
+class EquipementController extends Controller
 {
 
 

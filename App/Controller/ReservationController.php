@@ -10,14 +10,15 @@ use Laminas\Diactoros\ServerRequest;
 use LidemFramework\View;
 use Psr\Http\Message\ResponseInterface;
 
-class ReservationController
+class ReservationController extends Controller
 {
 	public function index(): ResponseInterface
 	{
-        $view_data = [
+        $view_data = array_merge(
+            self::getDefaultViewData(),[
             'html_title' => 'Toutes les réservations - AirBnB',
             'reservations' => RepositoryManager::getRm()->reservationRepository->findAll()
-        ];
+        ]);
 
         $view = new View( 'logement/index' );
 
@@ -27,10 +28,11 @@ class ReservationController
 
     public function reservation(): ResponseInterface
     {
-        $view_data = [
+        $view_data = array_merge(
+            self::getDefaultViewData(), [
             'html_title' => 'Réservation - AirBnB',
             'reservations' => RepositoryManager::getRm()->logementRepository->findAll()
-        ];
+        ]);
 
         $view = new View( 'page/reserver' );
 

@@ -9,9 +9,13 @@ background-color: #fcf3ea;
 }
 
 
-header{
+.welcome{
+    margin-top:50px;
+}
 
-
+.welcome i {
+    color:pink;
+    font-size: 25px;
 }
 
 nav{
@@ -45,11 +49,7 @@ h1{
     border:1px solid black;
 }
 
-.bouton-voirplus:active{
-    background-color: white;
-    color:black;
-    border:1px solid black;
-}
+
 
 .img-car-findall{
     width: 100%;
@@ -61,8 +61,10 @@ h1{
     margin-left:25%;
 }
 
-.img-card-detail{
 
+.liste-equipement{
+    margin-top:10px;
+    margin-bottom:20px;
 }
 
 /**********************  Forms ************************/

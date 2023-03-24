@@ -31,11 +31,12 @@ class LogementController extends Controller
 
     public function getAnnoncesById(): ResponseInterface
     {
-        // TODO
-        $view_data = [
+
+        $view_data = array_merge(
+            self::getDefaultViewData(), [
             'html_title' => 'Tous les logements - AirBnB',
             'logements' => RepositoryManager::getRm()->logementRepository->findAll()
-        ];
+        ]);
 
         $view = new View( 'page/mesannonces' );
 
@@ -47,11 +48,16 @@ class LogementController extends Controller
 
     public function show( int $id ): ResponseInterface
     {
-        $obj_logement = RepositoryManager::getRm()->logementRepository->findById( $id );
+
+        $equipement = RepositoryManager::getRm()->equipementRepository->findAllEquipementById($id);
+
+
+        $obj_logement_pouet = RepositoryManager::getRm()->logementRepository->findByIdWithInfos($id);
+
 
         // Si le jouet n'est pas dans la base ($obj_toy sera null)
         // on renvoie une page 404
-        if( is_null( $obj_logement ) ) {
+        if( is_null( $obj_logement_pouet ) ) {
             return View::ErrorResponse( 404, [
                 'html_title' => 'Page non trouvée - Mon Super site'
             ]);
@@ -59,10 +65,12 @@ class LogementController extends Controller
 
         // Sinon on charge la vue de détail
 
-        $view_data = [
-            'html_title' => $obj_logement->id .' - AirBnB',
-            'logement' => $obj_logement
-        ];
+        $view_data = array_merge(
+            self::getDefaultViewData(),[
+            'html_title' => $obj_logement_pouet->id .' - AirBnB',
+            'logement' => $obj_logement_pouet,
+            'equipements' => $equipement
+        ]);
 
         $view = new View( 'logement/detail' );
 
@@ -71,10 +79,11 @@ class LogementController extends Controller
 
 	public function add(): ResponseInterface
 	{
-		$view_data = [
+		$view_data = array_merge(
+            self::getDefaultViewData(),[
 			'html_title' => 'Ajouter un logement - AirBnB',
             'type_logements' => RepositoryManager::getRm()->type_logementRepository->findAll()
-		];
+		]);
 
 		$view = new View( 'logement/add' );
 
@@ -106,4 +115,7 @@ class LogementController extends Controller
 
         return new RedirectResponse( '/' );
 	}
+
+
+
 }

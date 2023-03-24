@@ -10,7 +10,7 @@ use Laminas\Diactoros\ServerRequest;
 use LidemFramework\View;
 use Psr\Http\Message\ResponseInterface;
 
-class UserController
+class UserController extends Controller
 {
 	public function index(): ResponseInterface
 	{
@@ -20,9 +20,10 @@ class UserController
 
 	public function add(): ResponseInterface
 	{
-		$view_data = [
+		$view_data =array_merge(
+            self::getDefaultViewData(), [
 			'html_title' => 'S\'inscrire - AirBnB'
-		];
+		]);
 
 		$view = new View( 'user/add' );
 

@@ -19,10 +19,12 @@ class AuthController extends Controller
 {
 	public function index(): ResponseInterface
 	{
-        $view_data = [
+        $view_data = array_merge(
+            self::getDefaultViewData(),
+            [
             'html_title' => 'Connexion - AirBnB',
             'form_result' => Session::get(Session::FORM_RESULT)
-        ];
+        ]);
 
         $view = new View( 'user/login' );
 
@@ -75,16 +77,12 @@ class AuthController extends Controller
 
 
 
+    public function logout():void
+    {
 
-	public function auth(): RedirectResponse
-	{
-		return new RedirectResponse( '/connexion' );
-	}
-
-	public function logout(): RedirectResponse
-	{
-		return new RedirectResponse( '/connexion' );
-	}
+        Session::remove(Session::USER);
+        self::redirect('/');
+    }
 
 	public static function hashPassword( string $password ): string
 	{
