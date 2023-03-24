@@ -46,4 +46,8 @@ abstract class Repository
 
 		return $data ? new $model( $data ) : null;
 	}
+
+
+
+
 }

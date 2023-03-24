@@ -2,7 +2,11 @@
 
 <h1>Connexion</h1>
 
-
+<?php if ($form_result && $form_result->hasError()) : ?>
+    <div class="error">
+        <?php echo $form_result->getError()[0]->getMessage() ?>
+    </div>
+<?php endif ?>
 
 <form action="" method="post" novalidate>
 
@@ -13,6 +17,8 @@
         <label for="email" class="form-label">Email</label>
         <input type="text" class="form-control" name="email">
     </div>
+
+
 
 
     <div class="mb-3">

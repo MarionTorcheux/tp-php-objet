@@ -23,8 +23,11 @@
             <a href="/"><img class='logo' src="/img/logo.png">
 
             <nav>
-                <button type="button" class="btn btn-dark bouton-voirplus"> <a href="/utilisateur/ajout">S'inscrire</a></button>
-                <button type="button" class="btn btn-dark bouton-voirplus"><a href="/utilisateur/connexion">Se connecter</a></button>
+                <?php if (!$view_data['isAuth']){ ?>
+                    <button type="button" class="btn btn-dark bouton-voirplus"> <a href="/utilisateur/ajout">S'inscrire</a></button>
+                    <button type="button" class="btn btn-dark bouton-voirplus"><a href="/utilisateur/connexion">Se connecter</a></button>
+                <?php  } ?>
+
                 <button type="button" class="btn btn-dark bouton-voirplus"><a href="/annonceur/ajout">Ajouter un logement</a></button>
                 <button type="button" class="btn btn-dark bouton-voirplus"><a href="/annonceur/ajout">Voir mes réservations</a></button>
                 <button type="button" class="btn btn-dark bouton-voirplus"><a href="/annonceur/mesannonces">Mes locations</a></button>

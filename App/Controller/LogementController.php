@@ -9,15 +9,19 @@ use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Diactoros\ServerRequest;
 use LidemFramework\View;
 use Psr\Http\Message\ResponseInterface;
+use App\Session;
 
-class LogementController
+class LogementController extends Controller
 {
 	public function index(): ResponseInterface
 	{
-        $view_data = [
+        $view_data = array_merge(
+            self::getDefaultViewData(),
+            [
             'html_title' => 'Tous les logements - AirBnB',
-            'logements' => RepositoryManager::getRm()->logementRepository->findAll()
-        ];
+            'logements' => RepositoryManager::getRm()->logementRepository->findAll(),
+            ]
+        );
 
         $view = new View( 'logement/index' );
 

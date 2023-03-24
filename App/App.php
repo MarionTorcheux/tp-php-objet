@@ -46,10 +46,17 @@ class App
 	 */
 	public function start(): void
 	{
+        session_start();
 		$this->router = Router::create();
 		$this->declareRoutes();
 		$this->startRouter();
 	}
+
+    public function getRouter(): Router
+    {
+        return $this->router;
+    }
+
 
 	public function getDbConfig(): DbConfig
 	{
@@ -80,6 +87,7 @@ class App
             $router->get( '/ajout', [ UserController::class, 'add' ] );
             $router->post( '/ajout', [ UserController::class, 'create' ] );
             $router->get( '/connexion', [ AuthController::class, 'index' ] );
+            $router->post( '/connexion', [ AuthController::class, 'login' ] );
             $router->get( '/reserver', [ ReservationController::class, 'reservation' ] );
 
         });
@@ -107,6 +115,7 @@ class App
 		}
 		// Les autres cas d'erreur
 		catch (Throwable $e) {
+            var_dump($e);
 			$this->router->getPublisher()->publish( View::ErrorResponse( 500 ) );
 		}
 	}
