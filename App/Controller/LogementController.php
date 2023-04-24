@@ -34,7 +34,7 @@ class LogementController extends Controller
 
         $view_data = array_merge(
             self::getDefaultViewData(), [
-            'html_title' => 'Tous les logements - AirBnB',
+            'html_title' => 'Mes annonces - AirBnB',
             'logements' => RepositoryManager::getRm()->logementRepository->findAll()
         ]);
 
@@ -117,6 +117,18 @@ class LogementController extends Controller
 	}
 
 
+    public function mesReservations( ServerRequest $request ): ResponseInterface
+    {
+        $view_data = array_merge(
+            self::getDefaultViewData(),[
+            'html_title' => 'Mes reservations - AirBnB',
+            'type_logements' => RepositoryManager::getRm()->type_logementRepository->findAll()
+        ]);
 
+
+        $view = new View( 'page/mesreservationsannonceur' );
+
+        return new HtmlResponse( $view->render( $view_data ) );
+    }
 
 }
