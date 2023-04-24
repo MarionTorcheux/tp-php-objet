@@ -11,12 +11,20 @@
             <p class="card-text"><small class="text-muted"><?php echo $logement->prix ?> € /nuit</small></p>
 
 
-            <ul class="list-group list-group-horizontal liste-equipement">
-            <?php foreach( $equipements as $equipement ): ?>
+            <?php if(isset($equipements) && count($equipements) > 0){ ?>
+                <ul class="list-group list-group-horizontal liste-equipement">
+                    <?php foreach( $equipements as $equipement ): ?>
 
-                    <li class="list-group-item"><?php echo $equipement->libelle ?></li>
-          <?php endforeach ?>
-            </ul>
+                        <li class="list-group-item"><?php echo $equipement->libelle ?></li>
+
+                    <?php endforeach ?>
+                </ul>
+
+            <?php } else {
+               ?> <small class="text-muted me-4">Pas d'équipement répertorié</small> <?php ;
+            } ?>
+
+
 
 
 

@@ -40,8 +40,13 @@ class EquipementRepository extends Repository
         while( $data = $stmt->fetch() ) {
             $arr_equipement[] = new $model( $data );
         }
+        if(isset($arr_equipement)){
+            return $arr_equipement;
+        } else {
+            return[];
+        }
 
-        return $arr_equipement;
+
 
 
 

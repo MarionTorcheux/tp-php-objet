@@ -55,7 +55,7 @@ class LogementController extends Controller
         $obj_logement_pouet = RepositoryManager::getRm()->logementRepository->findByIdWithInfos($id);
 
 
-        // Si le jouet n'est pas dans la base ($obj_toy sera null)
+        // Si le logement n'est pas dans la base ( sera null)
         // on renvoie une page 404
         if( is_null( $obj_logement_pouet ) ) {
             return View::ErrorResponse( 404, [

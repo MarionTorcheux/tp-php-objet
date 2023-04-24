@@ -91,6 +91,15 @@ class AuthController extends Controller
 		return hash( 'sha512', $str_hash );
 	}
 
+//    public const AUTH_SALT = 'c56a7523d96942a834b9cdc249bd4e8c7aa9';
+//    public const AUTH_PEPPER = '8d746680fd4d7cbac57fa9f033115fc52196';
+//
+//    public static function hash(string $str): string
+//    {
+//        $data = self::AUTH_SALT . $str . self::AUTH_PEPPER;
+//        return hash('sha512', $data);
+//    }
+
     public static function isAuth():bool
     {
         return !is_null(Session::get(Session::USER));
