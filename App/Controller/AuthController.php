@@ -59,6 +59,7 @@ class AuthController extends Controller
         // si il y a des erreurs on renvoie vers la page de connexion
         if($form_result->hasError()){
             Session::set(Session::FORM_RESULT, $form_result );
+            $form_result->addError(new FormError('Email et/ou mot de passe invalide'));
 
             self::redirect('/utilisateur/connexion');
 
