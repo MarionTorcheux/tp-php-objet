@@ -107,7 +107,7 @@ class LogementController extends Controller
             'description' => $form_data[ 'description' ],
             'couchage' => $form_data[ 'couchage' ],
             'photo' => $form_data[ 'photo' ],
-            'annonceur_id' => intval($form_data[ 'annonceur_id' ]),
+            'annonceur_id' => $_SESSION['USER']->id,
             'type_logement_id' => intval($form_data[ 'type_logement_id' ]),
             'titre'=>$form_data['titre']
 
