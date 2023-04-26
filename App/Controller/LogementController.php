@@ -31,6 +31,7 @@ class LogementController extends Controller
 
     public function getAnnoncesById(): ResponseInterface
     {
+        $id = $_SESSION['USER']->id;
 
         $view_data = array_merge(
             self::getDefaultViewData(), [
@@ -71,6 +72,7 @@ class LogementController extends Controller
             'logement' => $obj_logement_pouet,
             'equipements' => $equipement
         ]);
+
 
         $view = new View( 'logement/detail' );
 
@@ -117,16 +119,24 @@ class LogementController extends Controller
 	}
 
 
-    public function mesReservations( ServerRequest $request ): ResponseInterface
+    public function mesReservations(): ResponseInterface
     {
+        $id = $_SESSION['USER']->id;
+        $reservation = RepositoryManager::getRm()->reservationRepository->findReservationByIdUSer($id);
+
+
+
         $view_data = array_merge(
-            self::getDefaultViewData(),[
-            'html_title' => 'Mes reservations - AirBnB',
-            'type_logements' => RepositoryManager::getRm()->type_logementRepository->findAll()
-        ]);
+            self::getDefaultViewData(),
+            [
+                'html_title' => 'Mes réservations- AirBnB',
+                'reservation' => $reservation
+            ]
+        );
 
 
-        $view = new View( 'page/mesreservationsannonceur' );
+
+        $view = new View( 'page/mesreservations' );
 
         return new HtmlResponse( $view->render( $view_data ) );
     }

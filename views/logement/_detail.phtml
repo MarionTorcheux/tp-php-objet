@@ -30,8 +30,10 @@
 
 
 
+
+
             <?php if ($view_data['isAuth']){ ?>
-            <a href="/utilisateur/reserver" class="btn btn-dark bouton-voirplus">Réserver</a>
+            <a href="/utilisateur/reserver/<?php echo $logement->id ?>" class="btn btn-dark bouton-voirplus">Réserver</a>
             <?php  } else {
                 ?> <p> Connectez-vous pour réserver </p>
 

@@ -26,13 +26,15 @@ class ReservationController extends Controller
 	}
 
 
-    public function reservation(): ResponseInterface
+    public function reservation($id): ResponseInterface
     {
         $view_data = array_merge(
             self::getDefaultViewData(), [
-            'html_title' => 'Réservation - AirBnB',
-            'reservations' => RepositoryManager::getRm()->logementRepository->findAll()
+            'html_title' => 'Reservation - AirBnB',
+             'id_location' => $id
+
         ]);
+
 
         $view = new View( 'page/reserver' );
 
@@ -42,61 +44,19 @@ class ReservationController extends Controller
 
 
 
-    public function show( int $id ): ResponseInterface
-    {
-        $obj_logement = RepositoryManager::getRm()->logementRepository->findById( $id );
 
-        // Si le jouet n'est pas dans la base ($obj_toy sera null)
-        // on renvoie une page 404
-        if( is_null( $obj_logement ) ) {
-            return View::ErrorResponse( 404, [
-                'html_title' => 'Page non trouvée - Mon Super site'
-            ]);
-        }
-
-        // Sinon on charge la vue de détail
-
-        $view_data = [
-            'html_title' => $obj_logement->id .' - AirBnB',
-            'logement' => $obj_logement
-        ];
-
-        $view = new View( 'logement/detail' );
-
-        return new HtmlResponse( $view->render( $view_data ) );
-    }
-
-	public function add(): ResponseInterface
-	{
-		$view_data = [
-			'html_title' => 'Ajouter un logement - AirBnB'
-		];
-
-		$view = new View( 'logement/add' );
-
-		return new HtmlResponse( $view->render( $view_data ) );
-	}
-
-	public function create( ServerRequest $request ): RedirectResponse
+	public function create( ServerRequest $request, $id ): RedirectResponse
 	{
 		$form_data = $request->getParsedBody();
 
-		$logement_data = [
-			'pays' => $form_data[ 'pays' ],
-			'adresse' => $form_data[ 'adresse' ],
-            'ville' => $form_data[ 'ville' ],
-            'prix' => [ 'prix' ],
-            'surface' => $form_data[ 'surface' ],
-            'description' => $form_data[ 'description' ],
-            'couchage' => $form_data[ 'couchage' ],
-            'photo' => $form_data[ 'photo' ],
-            'annonceur_id' => $form_data[ 'annonceur_id' ],
-            'type_logement_id' => $form_data[ 'type_logement_id' ],
-            'titre'=>$form_data['titre']
-
+		$reservation_data = [
+			'logement_id' =>$id,
+			'user_id' => $_SESSION['USER']->id,
+            'date_debut' => $form_data[ 'datearrivee' ],
+            'date_fin' => $form_data[ 'datefin' ]
 		];
 
-		RepositoryManager::getRm()->logementRepository->create( new Logement( $logement_data ) );
+		RepositoryManager::getRm()->reservationRepository->create( new Reservation( $reservation_data ) );
 
         return new RedirectResponse( '/' );
 	}

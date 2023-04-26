@@ -87,7 +87,12 @@ class App
             $router->post( '/ajout', [ UserController::class, 'create' ] );
             $router->get( '/connexion', [ AuthController::class, 'index' ] );
             $router->post( '/connexion', [ AuthController::class, 'login' ] );
-            $router->get( '/reserver', [ ReservationController::class, 'reservation' ] );
+            $router->get( '/reserver/{id}', [ ReservationController::class, 'reservation' ] );
+
+
+
+            $router->post( '/reserver/{id}', [ ReservationController::class, 'create' ] );
+
             $router->get( '/mesreservations', [ LogementController::class, 'mesReservations' ] );
 
         });

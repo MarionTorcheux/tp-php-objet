@@ -61,6 +61,10 @@ class LogementRepository extends Repository
         $model = call_user_func( [ $this, 'getModel' ] );
         $data = $stmt->fetch();
 
+
+
         return $data ? new $model( $data ) : null;
     }
+
+
 }

@@ -46,9 +46,5 @@ class EquipementRepository extends Repository
             return[];
         }
 
-
-
-
-
     }
 }
