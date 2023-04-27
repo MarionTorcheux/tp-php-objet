@@ -15,9 +15,7 @@ class Logement extends Model
 
         public string $photo;
         public string $titre;
-
         public int $annonceur_id;
-
         public int $type_logement_id;
 
 

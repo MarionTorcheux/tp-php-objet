@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Model\Repository;
-
 use LidemFramework\Repository;
-
 use App\Model\User;
 
 class UserRepository extends Repository
@@ -25,7 +23,6 @@ class UserRepository extends Repository
             'SELECT * FROM `%s` WHERE `email`=:email AND `password`=:password',
             $this->getTable()
         );
-
 
         $stmt = $this->pdo->prepare($q);
         if (!$stmt) return null;

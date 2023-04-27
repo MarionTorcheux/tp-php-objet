@@ -12,29 +12,16 @@ use Psr\Http\Message\ResponseInterface;
 
 class ReservationController extends Controller
 {
-	public function index(): ResponseInterface
-	{
-        $view_data = array_merge(
-            self::getDefaultViewData(),[
-            'html_title' => 'Toutes les réservations - AirBnB',
-            'reservations' => RepositoryManager::getRm()->reservationRepository->findAll()
-        ]);
-
-        $view = new View( 'logement/index' );
-
-        return new HtmlResponse( $view->render( $view_data ) );
-	}
-
 
     public function reservation($id): ResponseInterface
     {
         $view_data = array_merge(
-            self::getDefaultViewData(), [
-            'html_title' => 'Reservation - AirBnB',
-             'id_location' => $id
-
-        ]);
-
+            self::getDefaultViewData(),
+            [
+                'html_title' => 'Reservation - AirBnB',
+                'id_location' => $id
+            ]
+        );
 
         $view = new View( 'page/reserver' );
 
@@ -45,7 +32,7 @@ class ReservationController extends Controller
 
 
 
-	public function create( ServerRequest $request, $id ): RedirectResponse
+	public function create(ServerRequest $request, $id):RedirectResponse
 	{
 		$form_data = $request->getParsedBody();
 

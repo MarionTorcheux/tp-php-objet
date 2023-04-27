@@ -28,23 +28,21 @@ class EquipementRepository extends Repository
         $stmt = $this->pdo->prepare( $q );
 
         $stmt->execute([
-            'id' => $id
-        ]);
-
-
+                'id' => $id
+            ]);
 
         $model = call_user_func( [ $this, 'getModel' ] );
 
 
-
-        while( $data = $stmt->fetch() ) {
-            $arr_equipement[] = new $model( $data );
+        while($data = $stmt->fetch())
+        {
+            $arr_equipement[] = new $model($data);
         }
-        if(isset($arr_equipement)){
-            return $arr_equipement;
-        } else {
-            return[];
-        }
-
+            if(isset($arr_equipement))
+            {
+                return $arr_equipement;
+            } else {
+                return[];
+            }
     }
 }

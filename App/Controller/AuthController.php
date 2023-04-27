@@ -7,7 +7,6 @@ use App\Model\Repository\RepositoryManager;
 use App\Session;
 use App\Model\User;
 use Laminas\Diactoros\Response\HtmlResponse;
-use Laminas\Diactoros\Response\RedirectResponse;
 use Laminas\Diactoros\ServerRequest;
 use LidemFramework\View;
 use Psr\Http\Message\ResponseInterface;
@@ -45,7 +44,9 @@ class AuthController extends Controller
         else{
             $email = $post_data['email'];
 
-            // $password = self::hashPassword($post_data['password']);
+            //$password = self::hashPassword($post_data['password']);
+
+             // sans le hash
             $password = $post_data['password'];
 
             //Appel au repository
@@ -77,18 +78,18 @@ class AuthController extends Controller
 
 
 
-
+// deconnexion
     public function logout():void
     {
-
         Session::remove(Session::USER);
         self::redirect('/');
     }
 
+
+    // cryptage du mdp
 	public static function hashPassword( string $password ): string
 	{
 		$str_hash = App::get()->getSalt(). $password .App::get()->getPepper();
-
 		return hash( 'sha512', $str_hash );
 	}
 

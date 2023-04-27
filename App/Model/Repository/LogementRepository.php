@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Model\Repository;
-
 use LidemFramework\Repository;
-
 use App\Model\Logement;
 
 class LogementRepository extends Repository
@@ -47,7 +45,7 @@ class LogementRepository extends Repository
 
     public function findByIdWithInfos($id)
     {
-        $q = 'SELECT  logements.*, users.nom, users.prenom, types_logement.libelle FROM logements 
+        $q = 'SELECT logements.*, users.nom, users.prenom, types_logement.libelle FROM logements 
                     INNER JOIN users on users.id = logements.annonceur_id
                     INNER JOIN types_logement on logements.type_logement_id = types_logement.id
                     WHERE logements.id = :id;';
@@ -61,10 +59,34 @@ class LogementRepository extends Repository
         $model = call_user_func( [ $this, 'getModel' ] );
         $data = $stmt->fetch();
 
-
-
         return $data ? new $model( $data ) : null;
     }
 
+
+    public function getAnnoncesByIdUser($id)
+    {
+        $q = 'SELECT logements.* FROM logements 
+              WHERE logements.annonceur_id = :id;';
+
+        $stmt = $this->pdo->prepare( $q );
+
+        $stmt->execute([
+            'id' => $id
+        ]);
+
+        $model = call_user_func([$this,'getModel']);
+
+        while($data = $stmt->fetch())
+        {
+            $arr_annonces[] = new $model( $data );
+        }
+            if(isset( $arr_annonces))
+            {
+                return  $arr_annonces;
+            } else {
+
+                return[];
+            }
+    }
 
 }

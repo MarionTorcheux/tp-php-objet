@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Model\Repository;
-
 use LidemFramework\Repository;
-
 use App\Model\Reservation;
 
 class ReservationRepository extends Repository
@@ -34,11 +32,11 @@ class ReservationRepository extends Repository
         ]);
     }
 
-    public function findReservationByIdUSer($id)
+    public function findReservationByIdUser($id)
     {
         $q = 'SELECT  reservations.id, reservations.logement_id, reservations.user_id, reservations.date_debut, reservations.date_fin, logements.titre, logements.photo, logements.description, logements.id  FROM reservations 
               INNER JOIN logements on reservations.logement_id = logements.id
-                    WHERE reservations.user_id = :id;';
+              WHERE reservations.user_id = :id;';
 
         $stmt = $this->pdo->prepare( $q );
 
@@ -46,16 +44,20 @@ class ReservationRepository extends Repository
             'id' => $id
         ]);
 
-        $model = call_user_func( [ $this, 'getModel' ] );
+        $model = call_user_func([$this,'getModel']);
 
-        while( $data = $stmt->fetch() ) {
+        while( $data = $stmt->fetch())
+        {
             $arr_reservation[] = new $model( $data );
         }
-        if(isset($arr_reservation)){
+
+         if(isset($arr_reservation))
+         {
             return $arr_reservation;
-        } else {
+         } else {
+
             return[];
-        }
+         }
     }
 
 }

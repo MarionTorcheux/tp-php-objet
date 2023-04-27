@@ -12,18 +12,15 @@ use Psr\Http\Message\ResponseInterface;
 
 class UserController extends Controller
 {
-	public function index(): ResponseInterface
-	{
-		// TODO: code
-		return new HtmlResponse( __METHOD__ );
-	}
 
 	public function add(): ResponseInterface
 	{
 		$view_data =array_merge(
-            self::getDefaultViewData(), [
-			'html_title' => 'S\'inscrire - AirBnB'
-		]);
+            self::getDefaultViewData(),
+            [
+			    'html_title' => 'S\'inscrire - AirBnB'
+		    ]
+        );
 
 		$view = new View( 'user/add' );
 
@@ -40,7 +37,6 @@ class UserController extends Controller
             'email' => $form_data[ 'email' ],
             'password' => AuthController::hashPassword( $form_data[ 'password' ] ),
             'role_id' => $form_data[ 'role_id' ]
-
 		];
 
 		RepositoryManager::getRm()->userRepository->create( new User( $user_data ) );

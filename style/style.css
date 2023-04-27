@@ -1,13 +1,11 @@
 body{
-background-color: #fcf3ea;
-
+    background-color: #fcf3ea;
 }
 
 .logo{
     width:180px;
     height: 180px;
 }
-
 
 .welcome{
     margin-top:50px;
@@ -29,9 +27,7 @@ nav{
 
 h1{
     font-family: 'Great Vibes', cursive;
-
 }
-
 
 .container-card-findall{
     gap: 20px;
@@ -48,8 +44,6 @@ h1{
     color:black;
     border:1px solid black;
 }
-
-
 
 .img-car-findall{
     width: 100%;
@@ -73,6 +67,11 @@ h1{
 .select-add-user{
     margin-top:30px;
     margin-bottom: 30px;
+}
+
+form{
+    width:50%;
+    margin-left:25%;
 }
 
 

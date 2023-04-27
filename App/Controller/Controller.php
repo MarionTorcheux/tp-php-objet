@@ -20,7 +20,6 @@ class Controller
     public static  function getDefaultViewData()
     {
         //var_dump(RepositoryManager::getRm()->userRepository->findById($_SESSION['USER']->id));
-
         //var_dump($_SESSION['USER']->id);
          $userConnect = AuthController::isAuth() ? RepositoryManager::getRm()->userRepository->findById($_SESSION['USER']->id) : [];
 

@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Model\Repository;
-
 use PDO;
-
 use LidemFramework\Database\DbConnect;
 use LidemFramework\Exception\DatabaseConfigAlreadySetException;
 use LidemFramework\Exception\DatabaseConfigNotSetException;
 use LidemFramework\Exception\SingletonUnserializationException;
-
 use App\App;
 
 class RepositoryManager
@@ -52,9 +49,6 @@ class RepositoryManager
 
 		return $pdo;
 	}
-
-
-
 
 
 	#region Méthodes Singleton

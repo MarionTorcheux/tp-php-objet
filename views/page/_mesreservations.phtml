@@ -6,12 +6,27 @@
 <?php else: ?>
 
 
+
+
+
     <div class="d-flex flex-row container-card-findall">
         <?php foreach( $reservation as $re ): ?>
+
+            <?php
+            $date_d = strtotime($re->date_debut);
+            $newformat = date('d/m/Y',$date_d);
+
+            $date_f = strtotime($re->date_fin);
+            $newF = date('d/m/Y', $date_f);
+
+            ?>
+
             <div class="card " style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title"><?php echo $re->date_debut ?></h5>
-                    <p class="card-text"> <?php echo $re->date_fin ?></p>
+                    <h5 class="card-title"> Votre réservation :</h5>
+
+                    <p class="card-text"> Du <?php echo $newformat ?> au <?php echo $newF ?></p>
+
 
                 </div>
             </div>
